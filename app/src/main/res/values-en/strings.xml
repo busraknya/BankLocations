@@ -2,8 +2,9 @@
 <resources>
     <string name="app_name">BankLocations</string>
     <string name="search_by_city">Search</string>
+    <string name="try_again">Try Again...</string>
     <string name="no_search_data_found">No search data found.</string>
-    <string name="no_internet_connection">No internet conntection.</string>
+    <string name="no_internet_connection">No internet connection.</string>
     <string name="no_internet_connection_description">Please control your internet connection.</string>
     <string name="city">City: </string>
     <string name="district">District: </string>
