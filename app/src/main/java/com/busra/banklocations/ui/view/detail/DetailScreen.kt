@@ -1,5 +1,8 @@
 package com.busra.banklocations.ui.view.detail
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +22,7 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Public
 import androidx.compose.material.icons.filled.Store
 import androidx.compose.material3.Card
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -53,7 +57,14 @@ fun DetailScreen(
 
 
     Scaffold(
-
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                startMapIntent(context, bankData)
+                }
+            ) {
+                Icon(Icons.Filled.LocationOn,"Location")
+            }
+        }
     ) { paddingValues ->
         Box(
             modifier = Modifier
@@ -154,4 +165,14 @@ fun BankCardDetailItem(
         )
     }
     Spacer(Modifier.height(5.dp))
+}
+
+private fun startMapIntent(
+    context: Context,
+    bankData: BankDataItem
+) {
+    val gmmIntentUri = Uri.parse("geo:0,0?q=${bankData.bankAddress}")
+    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+    mapIntent.setPackage("com.google.android.apps.maps")
+    context.startActivity(mapIntent)
 }

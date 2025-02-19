@@ -20,7 +20,7 @@ fun NoInternetDialog(callbackFlow: Flow<Boolean>) {
     val context = LocalContext.current
     val isConnected by callbackFlow.collectAsState(initial = isNetworkAvailable(context))
 
-    val showDialog = remember { mutableStateOf(!isConnected) } // İnternet yoksa göster
+    val showDialog = remember { mutableStateOf(!isConnected) }
 
     if (showDialog.value) {
         AlertDialog(
@@ -37,7 +37,7 @@ fun NoInternetDialog(callbackFlow: Flow<Boolean>) {
                 TextButton(
                     onClick = {
                         if (isNetworkAvailable(context)) {
-                            showDialog.value = false // İnternet varsa dialog kapansın
+                            showDialog.value = false
                         } else {
                             Log.e("TAG", "Still no internet")
                         }
