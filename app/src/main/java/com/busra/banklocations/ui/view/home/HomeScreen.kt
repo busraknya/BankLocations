@@ -52,6 +52,7 @@ import com.busra.banklocations.data.model.BankDataItem
 import com.busra.banklocations.ui.component.ErrorImage
 import com.busra.banklocations.ui.component.LoadingAnimation
 import com.busra.banklocations.ui.component.NoDataImage
+import com.busra.banklocations.ui.navigation.AppScreen
 import com.busra.banklocations.ui.viewmodel.HomeViewModel
 import com.google.gson.Gson
 import java.net.URLEncoder
@@ -95,12 +96,7 @@ fun HomeScreen(navController: NavController) {
             }
         }
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-        ) { //Local Decision
-            Surface(
+            Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
@@ -178,14 +174,16 @@ fun HomeScreen(navController: NavController) {
                     } else {
                         items(filteredBankData) { bankItem ->
                             BankDataCard(bankItem) {
-                                //TODO: Detail Screen
+                                val bankDataJson = gson.toJson(bankItem)
+                                val encodedBankDataJson = URLEncoder.encode(bankDataJson, StandardCharsets.UTF_8.toString())
+                                navController.navigate("${AppScreen.DETAIL_SCREEN.name}/${encodedBankDataJson}")
                             }
                         }
                     }
                 }
             }
         }
-    }
+
 }
 
 @Preview

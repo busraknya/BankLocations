@@ -21,6 +21,7 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.busra.banklocations.R
+import com.busra.banklocations.ui.navigation.AppScreen
 import kotlinx.coroutines.delay
 
 @Composable
@@ -37,7 +38,7 @@ fun SplashScreen(navController: NavController) {
 
     LaunchedEffect(Unit) {
         delay(5000)
-        //TODO: navController.navigate("homescreen")
+        navController.navigate(AppScreen.HOME_SCREEN.name)
     }
 
     Scaffold { paddingValues ->

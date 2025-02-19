@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.flowOn
 
 object NetworkStatusChecker {
 
-    fun networkChecker(context: Context) : Flow<Boolean> = callbackFlow {
+    fun networkChecker(context: Context): Flow<Boolean> = callbackFlow {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkCallback = object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
-               trySend(true).isSuccess
+                trySend(true).isSuccess
             }
 
             override fun onLost(network: Network) {
@@ -24,7 +24,7 @@ object NetworkStatusChecker {
         }
 
         connectivityManager.registerDefaultNetworkCallback(networkCallback)
-        awaitClose{
+        awaitClose {
             connectivityManager.unregisterNetworkCallback(networkCallback)
         }
     }.flowOn(Dispatchers.IO)
