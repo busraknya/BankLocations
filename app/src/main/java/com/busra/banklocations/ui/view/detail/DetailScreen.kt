@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import com.busra.banklocations.R
 import com.busra.banklocations.data.model.BankDataItem
 import com.google.gson.Gson
+import java.net.URLDecoder
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
@@ -47,10 +48,9 @@ fun DetailScreen(
     val context = LocalContext.current
 
     val gson = Gson()
-    val bankData =gson.fromJson(
-        URLEncoder.encode(bankDataJson, StandardCharsets.UTF_8.toString()),
-        BankDataItem::class.java
-    )
+    val bankJson = URLDecoder.decode(bankDataJson, StandardCharsets.UTF_8.toString())
+    val bankData = gson.fromJson(bankJson, BankDataItem::class.java)
+
 
     Scaffold(
 
@@ -122,7 +122,7 @@ fun BankDetailCard(bankData: BankDataItem = BankDataItem()) {
             BankCardDetailItem(Icons.Default.LocationOn,"${bankData.bankAddress}")
             BankCardDetailItem(Icons.Default.Public,"${bankData.bankCoordinate}")
             BankCardDetailItem(Icons.Default.Atm,"${bankData.bankAtm}")
-            
+
             Spacer(modifier = Modifier.height(10.dp))
         }
     }
@@ -145,7 +145,7 @@ fun BankCardDetailItem(
         )
         Spacer(modifier = Modifier.width(10.dp))
         Text(
-            text = "$bankItemText",
+            text = "${bankItemText}",
             style = TextStyle(
                 color = MaterialTheme.colorScheme.secondary,
                 fontSize = 17.sp,

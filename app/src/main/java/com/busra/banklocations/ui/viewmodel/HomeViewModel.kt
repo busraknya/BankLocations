@@ -34,10 +34,10 @@ class HomeViewModel @Inject constructor(
                 is Resource.Error -> {
                     _homeState.value = HomeScreenState(isLoading = false, errorMessage = it.message ?: "Error!")
                 }
-                is Resource.Success -> {
+                is Resource.Loading -> {
                     _homeState.value = HomeScreenState(isLoading = true)
                 }
-                is Resource.Loading -> {
+                is Resource.Success -> {
                     delay(1000)
                     _homeState.value = HomeScreenState(isLoading = false, bankData = it.data)
                     _filteredBankList.value = it.data ?: emptyList()

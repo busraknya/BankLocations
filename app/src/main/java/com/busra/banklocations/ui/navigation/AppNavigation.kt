@@ -48,7 +48,7 @@ fun AppNavigation(
         }
 
         composable(
-            route = "${AppScreen.DETAIL_SCREEN.name}/{bankDatJson}",
+            route = "${AppScreen.DETAIL_SCREEN.name}/{bankDataJson}",
             arguments = listOf(navArgument("bankDataJson") {
                 type = NavType.StringType
             })
